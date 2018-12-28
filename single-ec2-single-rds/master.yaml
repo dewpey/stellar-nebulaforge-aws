@@ -159,16 +159,13 @@ Mappings:
       CatchupRecent: '8640'
       LogFilePath: ''
     Test:
-      NetworkPassphrase: 'Test SDF Network ; September 2015'
-      KnownPeers: 'core-testnet1.stellar.org,core-testnet2.stellar.org,core-testnet3.stellar.org'
+      NetworkPassphrase: 'Onfo Test Network ; December 2018'
+      KnownPeers: ''
       UnsafeQuorum: 'true'
       FailureSafety: '1'
       Commands: 'll?level=error&partition=Overlay' # Reduce chatty logging about connectionsS
       History: |
         {
-          "h1": { "get": "curl -sf https://s3-eu-west-1.amazonaws.com/history.stellar.org/prd/core-testnet/core_testnet_001/{0} -o {1}" },
-          "h2": { "get": "curl -sf https://s3-eu-west-1.amazonaws.com/history.stellar.org/prd/core-testnet/core_testnet_002/{0} -o {1}" },
-          "h3": { "get": "curl -sf https://s3-eu-west-1.amazonaws.com/history.stellar.org/prd/core-testnet/core_testnet_003/{0} -o {1}" }
         }
       QuorumSet: |
         [{
@@ -177,7 +174,7 @@ Mappings:
 
   HorizonConfigMap:
       Test:
-        NetworkPassphrase: 'Test SDF Network ; September 2015'
+        NetworkPassphrase: 'Onfo Test Network ; December 2018'
         LogLevel: 'info'
         Ingest: 'true'
         PerHourRateLimit: '72000'
@@ -678,7 +675,7 @@ Resources:
       ContainerDefinitions:
         - Name: 'core'
           Essential: true
-          Image: !Sub 'starformlabs/stellar-core:${StellarCoreVersion}'
+          Image: !Sub 'onfo/onfo-stellar-horizon'
           MemoryReservation: !FindInMap [MemoryReservationMap, !Ref 'InstanceType', core]
           MountPoints:
             - SourceVolume: efs-volume
@@ -739,7 +736,7 @@ Resources:
 
         - Name: 'horizon'
           Essential: true
-          Image: !Sub 'starformlabs/stellar-horizon:${HorizonVersion}'
+          Image: !Sub 'onfo/onfo-stellar-horizon'
           MemoryReservation: !FindInMap [MemoryReservationMap, !Ref 'InstanceType', horizon]
           MountPoints:
             - SourceVolume: efs-volume
